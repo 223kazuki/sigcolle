@@ -27,12 +27,9 @@
                         <a href="/register" class="header item">ユーザ登録</a>
                     </div>
                 </div>
-                <div class="ui container three column grid" th:unless="((${session} == null) or (${session.name} == null)) ">
+                <div class="ui container two column grid" th:unless="((${session} == null) or (${session.name} == null)) ">
                     <div class="column">
-                        <p class="header item"><span th:text="${session.name}">name</span>　さん</p>
-                    </div>
-                    <div class="column">
-                        <a href="/mypage" class="header item">マイページ</a>
+                        <p class="header item"><a href="/mypage"><span th:text="${session.name}">name</span></a>　さん</p>
                     </div>
                     <div class="column">
                         <a href="/logout" class="header item">ログアウト</a>
