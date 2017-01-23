@@ -1,0 +1,1 @@
+SELECT * FROM campaign WHERE title LIKE '%' || /*title*/'' || '%'

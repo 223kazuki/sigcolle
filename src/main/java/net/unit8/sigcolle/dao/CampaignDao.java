@@ -2,6 +2,7 @@ package net.unit8.sigcolle.dao;
 
 import net.unit8.sigcolle.DomaConfig;
 import net.unit8.sigcolle.model.Campaign;
+import net.unit8.sigcolle.model.User;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
@@ -21,4 +22,7 @@ public interface CampaignDao {
 
     @Insert
     int insert(Campaign campaign);
+
+    @Select(ensureResult = true)
+    List<Campaign> select(String title);
 }
