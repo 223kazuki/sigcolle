@@ -32,9 +32,20 @@
                             <button class="ui fluid red button">検索</button>
                         </form>
                         <br>
-                        <div th:each="campaign : ${results}">
-                            <a class="campaigns" th:href="'/campaign/'+${campaign.id}" th:text="${campaign.title}">title</a>
-                        </div>
+                        <table style="width:100%;">
+                            <thead>
+                                <tr style="border: solid">
+                                    <th style="border: solid">キャンペーン名</th>
+                                    <th style="border: solid">目標賛同数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border: solid" th:each="campaign : ${results}">
+                                    <td style="border: solid"><a class="campaigns" th:href="'/campaign/'+${campaign.id}" th:text="${campaign.title}">title</a></td>
+                                    <td style="border: solid"><a class="campaigns" th:href="'/campaign/'+${campaign.id}" th:text="${campaign.goal}">goal</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
