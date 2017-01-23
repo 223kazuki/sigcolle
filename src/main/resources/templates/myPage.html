@@ -1,0 +1,52 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signature Collection</title>
+    <link href="http://fonts.googleapis.com/css?family=Exo:900" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css" rel="stylesheet"/>
+    <link href="/css/main.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="pusher">
+    <div class="ui fixed menu">
+        <div class="ui container">
+            <a href="/" class="header item">SIG COLLE</a>
+        </div>
+    </div>
+
+    <div class="full height image">
+        <div class="ui main container">
+            <div class="menu bar">
+            </div>
+            <div class="ui information container">
+                <div class="ui three column grid">
+                    <div class="column"></div>
+                    <div class="column">
+                        <h1 class="ui center aligned header">マイページ</h1>
+                        <h2>登録情報更新</h2>
+                        <form class="ui form" method="post" action="/mypage"
+                              th:action="@{~/mypage}">
+                            <div class="field">
+                                <input required type="text" maxlength='20' name="lastName" placeholder="姓" th:value="(${user.lastName}!=null)?${user.lastName}"/>
+                            </div>
+                            <div class="field">
+                                <input required type="text" maxlength='20' name="firstName" placeholder="名" th:value="(${user.firstName}!=null)?${user.firstName}"/>
+                            </div>
+                            <div class="field" th:classappend="${user.hasErrors('email')}?'error'">
+                                <input required type="email" maxlength='50' name="email" placeholder="メールアドレス" th:value="(${user.email}!=null)?${user.email}"/>
+                                <div class="ui pointing red basic label" th:if="${user.hasErrors('email')}" th:text="${user.getErrors('email').get(0)}"></div>
+                            </div>
+                            <div class="field">
+                                <input required type="password" minlength='4' maxlength='20' name="pass" placeholder="パスワード"/>
+                            </div>
+                            <button class="ui fluid red button">更新</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

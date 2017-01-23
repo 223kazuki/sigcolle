@@ -5,6 +5,7 @@ import net.unit8.sigcolle.model.User;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
+import org.seasar.doma.Update;
 
 import java.util.List;
 
@@ -18,6 +19,9 @@ public interface UserDao {
 
     @Insert
     int insert(User user);
+
+    @Update
+    int update(User user);
 
     @Select
     User selectByUserId(Long userId);
