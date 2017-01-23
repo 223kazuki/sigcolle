@@ -1,1 +1,0 @@
-INSERT INTO campaign(campaign_id, title, statement, goal, created_by) VALUES (1L,'test', 'test', 10L, 1L);

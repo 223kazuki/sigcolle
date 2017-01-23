@@ -43,18 +43,24 @@ public class CampaignRegisterController {
     // ログイン処理
     @Transactional
     public HttpResponse register(CampaignRegisterForm form, Session session) throws IOException {
+        Object userId = session.get("userId");
+        if (userId == null) {
+            return builder(redirect("/", SEE_OTHER))
+                    .set(HttpResponse::setSession, session)
+                    .build();
+        }
 
         CampaignDao dao = domaProvider.getDao(CampaignDao.class);
         Campaign campaign = builder(new Campaign())
                 .set(Campaign::setTitle, form.getTitle())
                 .set(Campaign::setStatement, form.getStatement())
                 .set(Campaign::setGoal, form.getGoal())
-                .set(Campaign::setCreatedBy, 0L)
+                .set(Campaign::setCreatedBy, Long.parseLong(userId.toString()))
                 .build();
         dao.insert(campaign);
 
-        return templateEngine.render("campaignRegister",
-                "campaignRegister", form
-        );
+        return builder(redirect("/", SEE_OTHER))
+                .set(HttpResponse::setSession, session)
+                .build();
     }
 }
