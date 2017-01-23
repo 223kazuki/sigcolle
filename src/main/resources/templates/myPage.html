@@ -24,6 +24,10 @@
                     <div class="column"></div>
                     <div class="column">
                         <h1 class="ui center aligned header">マイページ</h1>
+                        <h2>作成キャンペーン一覧</h2>
+                        <div th:each="campaign : ${campaigns}">
+                            <a class="campaigns" th:href="'/campaign/'+${campaign.id}" th:text="${campaign.title}">title</a>
+                        </div>
                         <h2>登録情報更新</h2>
                         <form class="ui form" method="post" action="/mypage"
                               th:action="@{~/mypage}">

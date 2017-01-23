@@ -20,6 +20,8 @@ import org.pegdown.PegDownProcessor;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static enkan.util.BeanBuilder.builder;
 import static enkan.util.HttpResponseUtils.RedirectStatusCode.SEE_OTHER;
@@ -59,14 +61,20 @@ public class MyPageController {
     public HttpResponse index(MyPageForm form, Session session) throws IOException {
         MyPageForm myPageForm = new MyPageForm();
         UserDao userDao = domaProvider.getDao(UserDao.class);
-        User user = userDao.selectByUserId(Long.parseLong(session.get("userId").toString()));
+        Long userId = Long.parseLong(session.get("userId").toString());
+        User user = userDao.selectByUserId(userId);
         myPageForm.setFirstName(user.getFirstName());
         myPageForm.setLastName(user.getLastName());
         myPageForm.setEmail(user.getEmail());
-
         myPageForm.setPass(user.getPass());
+
+        List<Campaign> campaigns = new ArrayList<Campaign>();
+        CampaignDao campaignDao = domaProvider.getDao(CampaignDao.class);
+        campaigns = campaignDao.selectByUserId(userId);
+
         return templateEngine.render("myPage",
-                "user", myPageForm);
+                "user", myPageForm,
+        "campaigns", campaigns);
     }
 
     @Transactional
