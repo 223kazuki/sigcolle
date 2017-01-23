@@ -46,7 +46,7 @@ public class CampaignRegisterController {
 
         CampaignDao dao = domaProvider.getDao(CampaignDao.class);
         Campaign campaign = builder(new Campaign())
-                .set(Campaign::setTitle, form.getTitle())ｃ
+                .set(Campaign::setTitle, form.getTitle())
                 .set(Campaign::setStatement, form.getStatement())
                 .set(Campaign::setGoal, form.getGoal())
                 .set(Campaign::setCreatedBy, 0L)
