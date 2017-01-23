@@ -69,12 +69,15 @@ public class MyPageController {
         myPageForm.setPass(user.getPass());
 
         List<Campaign> campaigns = new ArrayList<Campaign>();
+        List<Campaign> signedCampaigns = new ArrayList<Campaign>();
         CampaignDao campaignDao = domaProvider.getDao(CampaignDao.class);
         campaigns = campaignDao.selectByUserId(userId);
+        signedCampaigns = campaignDao.selectBySignedUserId(userId);
 
         return templateEngine.render("myPage",
                 "user", myPageForm,
-        "campaigns", campaigns);
+        "campaigns", campaigns,
+        "signedCampaigns", signedCampaigns);
     }
 
     @Transactional

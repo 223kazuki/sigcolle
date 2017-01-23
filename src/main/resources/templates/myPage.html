@@ -28,6 +28,10 @@
                         <div th:each="campaign : ${campaigns}">
                             <a class="campaigns" th:href="'/campaign/'+${campaign.id}" th:text="${campaign.title}">title</a>
                         </div>
+                        <h2>賛同キャンペーン一覧</h2>
+                        <div th:each="campaign : ${signedCampaigns}">
+                            <a class="campaigns" th:href="'/campaign/'+${campaign.id}" th:text="${campaign.title}">title</a>
+                        </div>
                         <h2>登録情報更新</h2>
                         <form class="ui form" method="post" action="/mypage"
                               th:action="@{~/mypage}">
