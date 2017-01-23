@@ -50,6 +50,8 @@
                 <div th:each="campaign : ${campaigns}">
                     <a class="campaigns" th:href="'/campaign/'+${campaign.id}" th:text="${campaign.title}">title</a>
                 </div>
+                <h2>キャンペーン登録</h2>
+                <a class="campaigns" th:href="'/campaigns/register'" th:text="キャンペーン登録">title</a>
             </div>
         </div>
     </div>
