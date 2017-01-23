@@ -34,6 +34,10 @@ public class MyApplicationFactory implements ApplicationFactory {
             r.get("/campaign/:campaignId/signatures").to(SignatureController.class, "list");
             r.get("/campaigns/register").to(CampaignRegisterController.class, "index");
             r.post("/campaigns/register").to(CampaignRegisterController.class, "register");
+            r.get("/register").to(RegisterController.class, "index");
+            r.post("/register").to(RegisterController.class, "register");
+            r.get("/mypage").to(MyPageController.class, "index");
+            r.post("/mypage").to(MyPageController.class, "update");
             r.get("/campaigns/search").to(SearchController.class, "index");
             r.post("/campaigns/search").to(SearchController.class, "search");
             r.get("/login").to(LoginController.class, "index");

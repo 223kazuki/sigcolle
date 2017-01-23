@@ -27,18 +27,16 @@
                         <form class="ui form" method="post" action="/campaigns/register"
                               th:action="@{~/campaigns/register}">
                             <div class="field">
-                                <input required type="title" maxlength='50' name="title" placeholder="キャンペーン名" th:value="(${campaignRegister.title}!=null)?${campaignRegister.title}"/>
+                                <input required type="text" maxlength='30' name="title" placeholder="キャンペーン名" th:value="(${campaignRegister.title}!=null)?${campaignRegister.title}"/>
                             </div>
                             <div class="field">
-                                <input required type="statement" maxlength='50' name="statement" placeholder="ステートメント" th:value="(${campaignRegister.statement}!=null)?${campaignRegister.statement}"/>
+                                <textarea required type="text" maxlength='10000' name="statement" placeholder="宣言" th:value="(${campaignRegister.statement}!=null)?${campaignRegister.statement}"></textarea>
                             </div>
                             <div class="field">
-                                <input required type="goal" maxlength='50' name="goal" placeholder="目標数" th:value="(${campaignRegister.goal}!=null)?${campaignRegister.goal}"/>
+                                <input required type="number" maxlength='50' name="goal" placeholder="目標署名数" th:value="(${campaignRegister.goal}!=null)?${campaignRegister.goal}"/>
                             </div>
                             <button class="ui fluid red button">登録</button>
                         </form>
-                        <!--<br>-->
-                        <!--<a href="/register" class="register">アカウントをお持ちでない方はこちら</a>-->
                     </div>
                 </div>
             </div>

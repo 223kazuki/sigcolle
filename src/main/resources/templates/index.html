@@ -29,7 +29,7 @@
                 </div>
                 <div class="ui container two column grid" th:unless="((${session} == null) or (${session.name} == null)) ">
                     <div class="column">
-                        <p class="header item"><span th:text="${session.name}">name</span>　さん</p>
+                        <p class="header item"><a href="/mypage"><span th:text="${session.name}">name</span></a>　さん</p>
                     </div>
                     <div class="column">
                         <a href="/logout" class="header item">ログアウト</a>
@@ -50,10 +50,14 @@
                 <div th:each="campaign : ${campaigns}">
                     <a class="campaigns" th:href="'/campaign/'+${campaign.id}" th:text="${campaign.title}">title</a>
                 </div>
-                <h2>キャンペーン登録</h2>
-                <a class="campaigns" th:href="'/campaigns/register'" th:text="キャンペーン登録">title</a>
                 <h2>キャンペーン検索</h2>
                 <a class="campaigns" th:href="'/campaigns/search'" th:text="キャンペーン検索">title</a>
+                <div th:unless="(${session} == null) or (${session.name} == null)">
+                    <br>
+                    <br>
+                    <h2>キャンペーン登録</h2>
+                    <a class="campaigns" th:href="'/campaigns/register'" th:text="キャンペーン登録">title</a>
+                </div>
             </div>
         </div>
     </div>

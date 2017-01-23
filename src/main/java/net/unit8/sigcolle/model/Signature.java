@@ -22,4 +22,5 @@ public class Signature implements Serializable {
     String signatureComment;
 
     Long campaignId;
+    Long signedBy;
 }

@@ -17,6 +17,7 @@ public class V2__CreateSignature implements JdbcMigration {
                     "name VARCHAR(30) NOT NULL," +
                     "signature_comment CLOB," +
                     "campaign_id INTEGER NOT NULL," +
+                    "signed_by INTEGER" +
                     ")"
             );
         }

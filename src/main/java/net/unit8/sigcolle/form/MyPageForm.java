@@ -1,9 +1,7 @@
-    package net.unit8.sigcolle.form;
+package net.unit8.sigcolle.form;
 
 import enkan.component.doma2.DomaProvider;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -12,23 +10,36 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import java.util.List;
 
-    /**
- * @author kawasima
+/**
+ * @auther takahashi
  */
 @Data
-public class CampaignRegisterForm extends FormBase {
+public class MyPageForm extends FormBase {
     @Inject
     DomaProvider domaProvider;
 
-    @NotBlank
-    @Length(max = 30)
-    private String title;
+    @DecimalMin("1")
+    @DecimalMax("9999")
+    private String userId;
 
     @NotBlank
-    @Length(max = 10000)
-    private String statement;
+    @Length(max = 20)
+    private String firstName;
 
-    private Long goal;
+    @NotBlank
+    @Length(max = 20)
+    private String lastName;
+
+    @NotBlank
+    @Length(max = 50)
+    private String email;
+
+    @Length(min = 4, max = 20)
+    private String pass;
+
+    public Long getUserIdLong() {
+        return Long.parseLong(userId);
+    }
 
     @Override
     public boolean hasErrors() {

@@ -1,0 +1,1 @@
+SELECT * FROM campaign WHERE created_by=/*userId*/1;

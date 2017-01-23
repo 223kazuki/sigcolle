@@ -17,20 +17,12 @@ public class Campaign implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long campaignId;
 
-    @Getter
-    @Setter
     private String title;
 
     // Markdown description
-    @Getter
-    @Setter
     private String statement;
 
-    @Getter
-    @Setter
     private Long goal;
 
-    @Getter
-    @Setter
     private Long createdBy;
 }

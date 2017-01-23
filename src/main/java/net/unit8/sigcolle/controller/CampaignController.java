@@ -67,15 +67,26 @@ public class CampaignController {
     }
 
     @Transactional
-    public HttpResponse sign(SignatureForm form) {
+    public HttpResponse sign(SignatureForm form, Session session) {
         if (form.hasErrors()) {
             return showCampaign(form.getCampaignIdLong(), form, null);
         }
-        Signature signature = builder(new Signature())
-                .set(Signature::setCampaignId, form.getCampaignIdLong())
-                .set(Signature::setName, form.getName())
-                .set(Signature::setSignatureComment, form.getSignatureComment())
-                .build();
+        Signature signature;
+        if (session != null && session.get("userId") != null) {
+            Long userId = Long.parseLong(session.get("userId").toString());
+            signature = builder(new Signature())
+                    .set(Signature::setCampaignId, form.getCampaignIdLong())
+                    .set(Signature::setName, form.getName())
+                    .set(Signature::setSignatureComment, form.getSignatureComment())
+                    .set(Signature::setSignedBy, userId)
+                    .build();
+        } else {
+            signature = builder(new Signature())
+                    .set(Signature::setCampaignId, form.getCampaignIdLong())
+                    .set(Signature::setName, form.getName())
+                    .set(Signature::setSignatureComment, form.getSignatureComment())
+                    .build();
+        }
         SignatureDao signatureDao = domaProvider.getDao(SignatureDao.class);
         signatureDao.insert(signature);
 

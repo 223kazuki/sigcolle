@@ -11,6 +11,8 @@ import net.unit8.sigcolle.form.CampaignForm;
 import net.unit8.sigcolle.form.CampaignRegisterForm;
 import net.unit8.sigcolle.model.Campaign;
 import net.unit8.sigcolle.model.User;
+import org.pegdown.Extensions;
+import org.pegdown.PegDownProcessor;
 import org.seasar.doma.jdbc.NoResultException;
 
 import javax.inject.Inject;
@@ -43,18 +45,26 @@ public class CampaignRegisterController {
     // ログイン処理
     @Transactional
     public HttpResponse register(CampaignRegisterForm form, Session session) throws IOException {
+        Object userId = session.get("userId");
+        if (userId == null) {
+            return builder(redirect("/", SEE_OTHER))
+                    .set(HttpResponse::setSession, session)
+                    .build();
+        }
+
+        PegDownProcessor processor = new PegDownProcessor(Extensions.ALL);
 
         CampaignDao dao = domaProvider.getDao(CampaignDao.class);
         Campaign campaign = builder(new Campaign())
                 .set(Campaign::setTitle, form.getTitle())
-                .set(Campaign::setStatement, form.getStatement())
+                .set(Campaign::setStatement,  processor.markdownToHtml(form.getStatement()))
                 .set(Campaign::setGoal, form.getGoal())
-                .set(Campaign::setCreatedBy, 0L)
+                .set(Campaign::setCreatedBy, Long.parseLong(userId.toString()))
                 .build();
         dao.insert(campaign);
 
-        return templateEngine.render("campaignRegister",
-                "campaignRegister", form
-        );
+        return builder(redirect("/", SEE_OTHER))
+                .set(HttpResponse::setSession, session)
+                .build();
     }
 }
